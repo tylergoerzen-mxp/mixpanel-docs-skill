@@ -13,13 +13,17 @@ Before writing anything, load the style guide from `references/style-guide.md` a
 
 ## Step 1: Gather Source Materials
 
-Start by asking the writer for the inputs you need. Use AskUserQuestion with these options:
+Use AskUserQuestion to ask the writer how they want to provide context:
 
-> "To write great docs, I need a couple of things from you. Please share:
-> 1. A link to the **PRD** (or any product spec) for this feature
-> 2. Links to the **GitHub PRs** that implement the change (one or more)
+> "To get started, share whatever you have — any combination works:
+> - A **PRD or product spec** link (or paste the text if it's behind auth)
+> - **GitHub PR links** for the implementation
+> - A **Jira ticket** or any other written spec
+> - Or just **describe the change** you want to make to the docs in your own words
 >
-> These help me understand both the intent of the feature and the technical implementation. If you don't have a PRD, a Jira ticket or a written description works too."
+> The more context you can give me, the better — but a plain description is enough to get started."
+
+If the writer provides only a description (no PRD or PR links), skip steps 2a and 2b and proceed directly to 2c using their description as the source of truth. Ask follow-up questions in Step 4 to fill any gaps.
 
 Wait for their response before proceeding.
 
