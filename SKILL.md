@@ -193,26 +193,17 @@ Answer here.
 
 ## Step 7: Write the Changelog Entry
 
-For any new feature or significant change, also draft a changelog entry. This is not optional — it should be delivered alongside the main doc draft.
+For any new feature or significant change, also draft a changelog entry. This is not optional — deliver it alongside the main doc draft.
 
-Changelogs live at `pages/changelogs/YYYY-MM-DD-slug.md`. Use this exact format:
+Before writing, read `references/changelog-style-guide.md`. Changelogs have a meaningfully different tone from docs — they use company voice ("we", "our"), can open with a narrative hook, and are announcement-forward rather than instructional.
 
-```md
----
-title: "Short description of what changed"
-slug: "changelog-YYYY-MM-DD-descriptive-slug"
-hidden: false
-createdAt: "YYYY-MM-DDT00:00:00.000Z"
-updatedAt: "YYYY-MM-DDT00:00:00.000Z"
-date: "YYYY-MM-DD"
----
-
-One to three sentences. Describe what changed and why it's useful. Focus on user benefit, not implementation detail.
-
-[Read more here.](/docs/path/to/new/page)
-```
-
-Title is in quotes, Title Case. Body is 1–3 sentences max. Link to the full docs page.
+Key facts:
+- Files live at `pages/changelogs/YYYY-MM-DD-slug.mdx` — note `.mdx`, not `.md`
+- Frontmatter includes extra fields: `thumbnail`, `description`, `isAnnouncement`
+- Body must start with `<ChangelogPostHeader date="..." image="..." title="..." />`
+- Images go in `/public/changelog/` and are referenced as `/changelog/filename.png`
+- Use `**Note:**` for plan/availability caveats — no `<Callout>` components
+- Scale length to significance: 2 sentences for small updates, full sections for major launches
 
 See live examples at: https://docs.mixpanel.com/changelogs
 

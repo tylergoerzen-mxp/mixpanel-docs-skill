@@ -184,24 +184,9 @@ Answer text here.
 
 ## Changelog Entries
 
-Changelogs live at `pages/changelogs/YYYY-MM-DD-slug.md`. Use this frontmatter exactly:
+See `changelog-style-guide.md` in this directory for the full changelog format. Changelogs have a distinct tone from docs and warrant their own guide.
 
-```md
----
-title: "Short description of what changed"
-slug: "changelog-YYYY-MM-DD-descriptive-slug"
-hidden: false
-createdAt: "YYYY-MM-DDT00:00:00.000Z"
-updatedAt: "YYYY-MM-DDT00:00:00.000Z"
-date: "YYYY-MM-DD"
----
-
-One to three sentences. Describe what changed and why it's useful to users.
-
-[Read more here.](https://docs.mixpanel.com/docs/...)
-```
-
-Titles are in quotes, title case. Keep the body short — 1–3 sentences max plus a link.
+Short summary: files are `.mdx` (not `.md`), frontmatter includes `thumbnail`/`description`/`isAnnouncement`, body starts with `<ChangelogPostHeader />`, uses "we"/"our" company voice, and images go in `/public/changelog/` (not `/public/`).
 
 ---
 
