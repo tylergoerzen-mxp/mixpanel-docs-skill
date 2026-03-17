@@ -52,14 +52,54 @@ The docs nav is organized into these top-level sections:
 
 ---
 
-## Step 3: Propose a Location
+## Step 3: Determine the Documentation Path
 
-Based on your research, determine:
-1. Which section(s) of the docs this feature belongs in
-2. Whether it needs a new page, a new section within an existing page, or an update to existing content
-3. The proposed file path (e.g., `pages/docs/reports/new-feature.mdx`)
+This is a decision step — the right answer shapes everything downstream. Based on your research, classify the change into one of three paths:
 
-Present your recommendation clearly and wait for confirmation before writing anything.
+**Path A — Update existing page**: The feature modifies, extends, or replaces something already documented. A page for this already exists and is the right home.
+
+**Path B — New section in an existing page**: The feature is closely related to an existing page but adds enough new surface area that it warrants a new `##` section within that page (not a whole new file).
+
+**Path C — Net new page**: The feature is distinct enough that no existing page covers it, or adding it to an existing page would make that page incoherent.
+
+### How to decide
+
+For **Path A or B**, fetch and read the existing page(s) before proposing anything:
+```bash
+curl -s "https://raw.githubusercontent.com/mixpanel/docs/main/pages/docs/<section>/<file>.mdx"
+```
+
+Then ask yourself:
+- Does the existing page already mention this feature, even briefly? → Likely Path A
+- Is the existing page about a parent feature this extends? → Likely Path B
+- Would a reader looking for this naturally land on an existing page first? → Path A or B
+- Is this feature categorically different from anything currently documented? → Path C
+
+### For Path A (updating existing content)
+
+Read the full existing page, then produce a **change summary** before writing anything:
+
+> "The existing page at `pages/docs/[path].mdx` already covers [X]. Based on the PR and PRD, here's what needs to change:
+>
+> - **Add**: [new section or content]
+> - **Update**: [specific section that's now stale or incomplete]
+> - **Remove**: [anything the PR makes obsolete, if applicable]
+> - **Unchanged**: [rest of the page stays as-is]
+>
+> I'll produce a targeted edit rather than a full rewrite. Does this scope look right?"
+
+For Path A, produce **only the changed sections** in the final output — not the full file. Clearly mark each chunk with the heading it belongs under and whether it's a replacement or addition.
+
+### For Path B or C
+
+Present your recommendation:
+- Proposed file path
+- Nav section it belongs in
+- Whether any `_meta.tsx` files need a new entry
+
+### In all cases
+
+Wait for the writer to confirm the path and scope before writing anything.
 
 ---
 
