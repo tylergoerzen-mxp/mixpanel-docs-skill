@@ -1,6 +1,18 @@
 # Mixpanel Docs Style Guide
 
-Derived from reading the actual docs repo (github.com/mixpanel/docs). Update this file when patterns in the live docs change.
+Derived from the actual docs repo (github.com/mixpanel/docs) and the internal [Maintaining Docs: Internal Workflows](https://www.notion.so/mxpnl/Maintaining-Docs-Internal-Workflows-896613cc41324df48f2a6afd1dba7ac0) guide. For anything not covered here, fall back to the [Google Dev Docs Style Guide](https://developers.google.com/style).
+
+---
+
+## Audience
+
+The docs serve two primary personas. Keep both in mind when writing:
+
+| | Developers | Analysts |
+|---|---|---|
+| Typical roles | Engineers | PMs, Analysts, Marketers, Designers |
+| Focus | Connecting data to Mixpanel | Creating and analyzing reports |
+| Communication | Use basic terms when possible; industry-standard technical terms are fine when needed. Don't teach people how to code — be cursory on steps most engineers already understand. | Spell out terminology that is technical or specific to product analytics. Define a term the first time it appears. Err on the side of over-explaining each step. |
 
 ---
 
@@ -144,26 +156,6 @@ Do not use Callouts for general information that could just be prose.
 
 ---
 
-## Images
-
-Two conventions exist in the codebase — both are fine:
-
-```mdx
-![](/filename.png)                                          # from /public, no alt text
-![replayHeroImage](/replayHeroImageWithPrivacy.png)         # from /public, with alt text
-![image](https://github.com/mixpanel/docs/assets/...)      # GitHub-hosted asset
-```
-
-**When to use each**:
-- New screenshots → upload to `/public/` and reference as `/filename.png`
-- Screenshots already uploaded to GitHub → use the GitHub asset URL
-
-Place images **immediately after** the sentence or step that describes what the reader is looking at. Don't cluster images at the end of a section.
-
-Image filenames in `/public/` use camelCase (e.g., `replayHeroImageWithPrivacy.png`, `webhookalert2.png`).
-
----
-
 ## FAQ Section
 
 Use `####` (H4) for each question. Don't use bold or a different format.
@@ -192,11 +184,19 @@ Short summary: files are `.mdx` (not `.md`), frontmatter includes `thumbnail`/`d
 
 ## Tone
 
+Our voice: **speak as a translator**. We're builders who use Mixpanel every day. Be plainspoken. Make the complex simple.
+
 - **Second person throughout** — "you", "your project", "your reports"
 - **Present tense** for describing current product behavior
 - **Active voice** — "Mixpanel calculates thresholds" not "thresholds are calculated by Mixpanel"
 - **No marketing language** — don't describe features as "powerful", "robust", or "seamless" in prose (the docs use these words occasionally in feature descriptions, but avoid them in instructional content)
+- **Let the product speak for itself** — avoid claims like "we are fast." Let customers say that for us.
 - **Functional** — tell the reader what to do or what they can expect; don't editorialize
+- **Conversational, not corporate** — but keep it professional
+- **Aim for timelessness** — avoid words like "now", "new", "update", "currently". These go stale fast.
+- **Brevity is beautiful** — provide steps, not word salad. "Easy reading is damn hard writing."
+- **Consistency** — once you use a term, keep using the same term throughout. Don't alternate between synonyms.
+- **Read it out loud** — cut anything that makes you pause or question the meaning
 
 ---
 
@@ -223,6 +223,99 @@ Use relative paths:
 
 ---
 
+## Punctuation & Grammar
+
+- No exclamation points
+- Oxford comma (like this, this, and this)
+- Em dashes — put a space before and after
+- Use "you" in almost all cases
+- Use `%`, not "percent" — 100% of the time
+- Title Case for product feature names inline (e.g., Insights Reports, Session Replay)
+
+---
+
+## Emphasis & Formatting
+
+- Use **bold** for emphasis
+- Do not use italics or underlines for emphasis
+- Do not use emojis
+- If a page has more than 2–3 H2 sections, consider breaking it into multiple pages
+
+---
+
+## Linking
+
+- Keep hyperlinks within the relevant sentence
+- A single link in a sentence should sit on the core keyword, not on "click here" or "learn more"
+- If linking to 2–3 things, use the (here, here, and here) framing
+
+---
+
+## Images
+
+Two conventions exist in the codebase — both are fine:
+
+```mdx
+![](/filename.png)                                          # from /public, no alt text
+![replayHeroImage](/replayHeroImageWithPrivacy.png)         # from /public, with alt text
+![image](https://github.com/mixpanel/docs/assets/...)      # GitHub-hosted asset
+```
+
+**When to use each**:
+- New screenshots → upload to `/public/` and reference as `/filename.png`
+- Screenshots already uploaded to GitHub → use the GitHub asset URL
+
+Place images **immediately after** the sentence or step that describes what the reader is looking at. Don't cluster images at the end of a section.
+
+Image filenames in `/public/` use camelCase (e.g., `replayHeroImageWithPrivacy.png`, `webhookalert2.png`).
+
+### Screenshot guidelines
+
+- **Focus on the relevant part** — you don't always need a full product view. Cropping to the key area creates focus.
+- **Don't show navigation or browser bars** unless they're relevant to the concept being demonstrated. Leaving them out also prevents images from going stale as quickly.
+- **Use demo data only** — never show customer data or internal Mixpanel data. Take special care that API credentials are not visible.
+- **Use light mode** — the light color scheme works best on the white docs background. Dark mode is visually heavy and doesn't balance well.
+- **Cross-reference copy and imagery** — if you add or update an image, double-check that surrounding text still matches.
+
+### Alt text
+
+- Brief — ideally under 125 characters
+- Describe what the image shows and why it matters in context
+- Don't start with "Image of" or "Picture of"
+- Don't keyword-stuff — a few coherent phrases focused on description
+
+---
+
+## Video
+
+Loom videos are acceptable in docs. Include them contextually with the relevant topic, not on standalone pages.
+
+---
+
+## Previewing Changes
+
+When you create a PR against the docs repo, Vercel generates a preview at:
+```
+https://docs-git-<branch_name>-mixpanel.vercel.app/docs/what-is-mixpanel
+```
+Replace `<branch_name>` with your branch name.
+
+---
+
+## Redirects
+
+The `redirects/` folder in the docs repo contains three files for managing URL redirects:
+
+| File | Redirects |
+|---|---|
+| `local.txt` | docs → docs |
+| `help-mixpanel-com.txt` | help → docs |
+| `developer-mixpanel-com.txt` | developer → docs |
+
+Format: `[incoming url] [destination]` — one per line.
+
+---
+
 ## What to Avoid
 
 - Sentence-case headings
@@ -231,3 +324,5 @@ Use relative paths:
 - Grouping all images at the end of a section
 - Long paragraphs — break up anything over ~5 sentences
 - Describing limitations after the fact — surface them early (plan gating at top, known limitations in a dedicated section)
+- Jargon or overly complex terminology — define technical terms for beginners
+- $100 words — we don't "deduce complexities to surface invisible tensions." We "help teams see clearly."

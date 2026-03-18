@@ -199,10 +199,13 @@ Before writing, read `references/changelog-style-guide.md`. Changelogs have a me
 
 Key facts:
 - Files live at `pages/changelogs/YYYY-MM-DD-slug.mdx` — note `.mdx`, not `.md`
-- Frontmatter includes extra fields: `thumbnail`, `description`, `isAnnouncement`
+- Frontmatter includes extra fields: `thumbnail`, `description` (<200 chars), `isAnnouncement`, `video`
 - Body must start with `<ChangelogPostHeader date="..." image="..." title="..." />`
-- Images go in `/public/changelog/` and are referenced as `/changelog/filename.png`
+- Use `<VideoButtonWithModal src="..." />` at the end for demo videos
+- Titles use **sentence case** (not Title Case like docs) — capitalize only the first word and proper nouns. Always use colons, not dashes.
+- Images go in `/public/changelog/` (target 828x465px) and are referenced as `/changelog/filename.png`
 - Use `**Note:**` for plan/availability caveats — no `<Callout>` components
+- **Always include pricing/packaging details** — if it's plan-gated or an add-on, state it explicitly
 - Scale length to significance: 2 sentences for small updates, full sections for major launches
 
 See live examples at: https://docs.mixpanel.com/changelogs

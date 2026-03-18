@@ -1,6 +1,14 @@
 # Mixpanel Changelog Style Guide
 
-Derived from reading recent changelogs in github.com/mixpanel/docs/pages/changelogs. Update when patterns change.
+Derived from the docs repo (github.com/mixpanel/docs/pages/changelogs) and the internal [How and when to add a new product update to the changelog](https://www.notion.so/mxpnl/How-and-when-to-add-a-new-product-update-to-the-changelog-130e0ba9256280a98087f8dbafe0fa4c) guide. Update when patterns change.
+
+---
+
+## When to post a changelog
+
+Post a changelog for **any change that materially affects the customer experience**. Small improvements in load time, moving a button, etc. don't get a dedicated changelog. If you're ever unsure, check with PMM.
+
+Changelogs should go out **within one day of a change being GA** so customers have something to reference. This avoids cases where a customer asks about a new feature but there's no documentation of its release.
 
 ---
 
@@ -41,9 +49,9 @@ isAnnouncement: false
 
 **Field notes:**
 - `thumbnail`: Path to a hero image, or `""` if none. Images for changelogs live in `/public/changelog/` (not `/public/` root) and are referenced as `/changelog/filename.png`.
-- `description`: Used as the preview text in the changelog feed. Keep it to one sentence, focused on user benefit.
-- `isAnnouncement`: Set `true` only for major launches — flagship features, significant platform expansions. Most entries are `false`.
-- `video`: Optional field. Include as `video: ""` if you need to add it later, or omit entirely.
+- `description`: Used as the preview text in the changelog feed. Keep under 200 characters. Go a layer deeper than the title — what does it do in detail, and why would someone use it?
+- `isAnnouncement`: Set `true` for Tier 1 launches or critical updates. Announcement posts should have a custom hero image from the brand team. Most entries are `false`.
+- `video`: Optional. If a demo video exists, include the Loom embed URL (e.g., `"https://www.loom.com/embed/..."`). Include both thumbnail and video when available so both appear in the feed.
 
 ---
 
@@ -63,23 +71,45 @@ If there's no image, use `image=""`. The `date` and `title` must match the front
 
 ---
 
+## VideoButtonWithModal component
+
+Use this component to embed demo videos with consistent formatting:
+
+```mdx
+<VideoButtonWithModal src="https://www.loom.com/embed/164cee809f034b6cb8db3e67adfd3d71" />
+```
+
+Place it at the end of the changelog body. The `video` field in frontmatter and this component serve different purposes — the frontmatter `video` field drives the feed preview, while this component renders the video inline on the changelog page.
+
+---
+
 ## Title formats
 
-Three patterns are used — pick based on what reads most naturally:
+Use **sentence case** (capitalize only the first word and proper nouns). No periods. Always use **colons** (not dashes or em dashes) to separate the product name from the benefit.
 
-```
-"Feature Name: What it does"                        # colon + benefit
-"Feature Area — Sub-feature Name"                   # em dash for sub-features
-"Plain statement about what changed"                # for smaller updates
-```
+Always note beta status in the title if applicable (e.g., "now in beta").
 
+### Title patterns by type of change
+
+**Net-new feature** — lead with the outcome or feature name:
+```
+"[Big Outcome or Capability] with [Feature Name]"
+"[Feature name] for [outcome]"
+```
 Examples:
-- `"Metric Trees: Build your first draft instantly with AI"`
-- `"Feature Flags — Group Cohort Targeting"`
-- `"Postgres Connectors now in Public Beta"`
-- `"Custom Alerts via webhook"`
+- `"Connect your LLM metrics to Mixpanel with Langfuse integration"`
 
-Title Case throughout. Titles in changelogs can be slightly more evocative than doc page titles.
+**Update to an existing product** — lead with the product name:
+```
+"[Product name]: [Outcome with] [name of change]"
+```
+Examples:
+- `"Session Replay: Understand instantly with AI summaries"`
+
+**Technical / backend / pricing / smaller fix** — keep it clear and straightforward:
+```
+"SSO, Data Views, and Sensitive Data Classification now available on Growth Plans"
+```
 
 ---
 
@@ -198,6 +228,31 @@ The arrow `→` is conventional for the prominent link format.
 
 ---
 
+## Learn More section
+
+For medium and long changelog entries, structure the body as a "Learn More" section:
+
+1. Open with what the feature does
+2. Bullet the key value props (use **bold labels**)
+3. End with a CTA linking to the docs
+4. **Always include pricing/packaging details** — if it's only available on Enterprise, add a note. If it's an add-on, say so.
+
+```mdx
+Use dynamic config to update your application in real-time and target users
+with different experiences, without changing code, all from one JSON payload.
+
+With dynamic config, you can:
+- **Go beyond on/off:** Control UI, logic, and defaults with structured parameters
+- **Iterate faster:** Update configuration instantly without redeploys
+- **Deliver tailored experiences:** Serve different configurations to different users
+
+Build more adaptable product experiences with dynamic config. [Learn More →](/docs/featureflags#types-of-feature-flags)
+
+**Note:** Dynamic config is available as part of the Feature Flagging add-on for enterprise customers.
+```
+
+---
+
 ## Images
 
 Images for changelogs live in `/public/changelog/` and are referenced as `/changelog/filename.png`.
@@ -211,6 +266,14 @@ This is different from regular doc images, which live in `/public/` and are refe
 # Regular doc image
 ![description](/featureName.png)
 ```
+
+### Image requirements
+
+- Target size: **828x465** pixels
+- For visual features, use a high-quality screenshot most representative of what it does, and include the feature name
+- For non-visual features (backend, pricing, etc.), use text or an icon — or skip the image entirely
+- Always use a **designed background** — no floating screenshots
+- Announcement posts (`isAnnouncement: true`) should have a custom hero image from the brand/design team
 
 ---
 
